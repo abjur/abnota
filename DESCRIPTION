@@ -1,0 +1,19 @@
+Package: abjClassifica
+Title: App para Classificacao de Processos
+Version: 0.0.0.9000
+Authors@R:
+    c(person(given = "Associação Brasileira de Jurimetria",
+             role = c("cph", "fnd")),
+    person("Renata", "Hirota", email = "re.hirota@gmail.com",
+             role = c("aut", "cre"))
+    )
+Description: Aplicacao em shiny para auxiliar na classificacao de projetos da ABJ.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports:
+    bslib,
+    rhandsontable,
+    shiny,
+    tibble
