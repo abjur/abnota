@@ -17,3 +17,5 @@ Imports:
     rhandsontable,
     shiny,
     tibble
+URL: https://github.com/abjur/abjClassifica
+BugReports: https://github.com/abjur/abjClassifica/issues
