@@ -13,9 +13,11 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-    bslib,
+    bslib (>= 0.4.2.9000),
     rhandsontable,
     shiny,
     tibble
 URL: https://github.com/abjur/abjClassifica
 BugReports: https://github.com/abjur/abjClassifica/issues
+Remotes:  
+    rstudio/bslib

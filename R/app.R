@@ -12,7 +12,7 @@ run_app <- function(
   ...
 ) {
    shinyApp(
-    ui = app_ui,
+    ui = app_ui(),
     server = app_server,
     onStart = onStart,
     options = options,
