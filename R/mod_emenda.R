@@ -32,6 +32,10 @@ mod_emenda_server <- function(id) {
 
     ns <- session$ns
 
+    list(
+      emenda = shiny::reactive(input$emenda)
+    )
+
   })
 }
 
