@@ -17,7 +17,7 @@ mod_litisconsorcio_ui <- function(id) {
       shiny::textInput(
         ns("litisconsorcio_nomes"), paste(
           "Nome do grupo (Se não encontrar o nome do grupo, escrever os",
-          "nomes das empresas concatenadas.)"
+          "nomes das empresas separadas por vírgula)"
         )
       ), ns = ns
     )
@@ -33,7 +33,10 @@ mod_litisconsorcio_ui <- function(id) {
 mod_litisconsorcio_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
+    shiny::reactive(tibble::tibble(
+      litisconsorcio = input$litisconsorcio,
+      litisconsorcio_nomes = input$litisconsorcio_nomes
+    ))
 
   })
 }

@@ -5,8 +5,6 @@
 #' @noRd
 app_server <- function(input, output, session) {
   id_processo <- mod_processo_server("mod_processo1")
-  # mod_emenda_server("mod_emenda1")
-  mod_pericia_server("mod_pericia1")
   mod_litisconsorcio_server("mod_litisconsorcio1")
   mod_deferimento_server("mod_deferimento1")
   mod_aj_server("mod_aj1")

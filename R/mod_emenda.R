@@ -30,11 +30,10 @@ mod_emenda_ui <- function(id) {
 mod_emenda_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
-
-    list(
-      emenda = shiny::reactive(input$emenda)
-    )
+    shiny::reactive(tibble::tibble(
+      houve_emenda = input$emenda,
+      data_emenda = ifelse(input$emenda == "Não", NA, input$data_emenda)
+    ))
 
   })
 }

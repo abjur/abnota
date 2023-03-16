@@ -40,11 +40,10 @@ mod_processo_ui <- function(id) {
           "Informações gerais",
           shiny::dateInput(ns("data_distribuicao"), "Data de distribuição"),
           shiny::h4("Emenda"),
-          mod_emenda_ui("mod_emenda1"),
-          shiny::verbatimTextOutput(ns("emenda_output"))
-          # shiny::h4("Perícia"),
-          # mod_pericia_ui("mod_pericia1"),
-          # mod_litisconsorcio_ui("mod_litisconsorcio1")
+          mod_emenda_ui(ns("mod_emenda1")),
+          shiny::h4("Perícia"),
+          mod_pericia_ui(ns("mod_pericia1")),
+          mod_litisconsorcio_ui(ns("mod_litisconsorcio1"))
         )
         # bslib::accordion_panel(
         #   "Deferimento",
@@ -63,7 +62,7 @@ mod_processo_ui <- function(id) {
     shiny::hr(),
     shiny::actionButton(ns("upload_processo"), "Upload de dados de processo"),
     shiny::hr(),
-    shiny::verbatimTextOutput("example")
+    shiny::dataTableOutput(ns("teste"))
   )
 }
 
@@ -72,35 +71,57 @@ mod_processo_server <- function(id) {
     id,
     function(input, output, session) {
 
-      ns <- session$ns
-
       shiny::observeEvent(input$upload_processo, {
 
-        if (input$processo_principal_rj == "Sim") {
-          text <- "Preencha os dados de partes"
-          processo <- tibble::tibble()
-        } else {
-          text <- ""
-          processo <- tibble::tibble()
+        check_id <- verificar_processo(input$id_processo)
+        if (!check_id) {
+          shinyWidgets::sendSweetAlert(
+            title = "ID inválido", text = "Verifique o número do processo",
+            type = "error"
+          )
         }
 
-        con <- bq_connect()
-        bigrquery::dbWriteTable(
-          con, "processo",
-          processo,
-          append = TRUE
-        )
-        bigrquery::dbDisconnect(con)
+        if (input$processo_principal_rj == "Sim") {
+
+          text <- "Preencha os dados de partes"
+
+          emenda <- mod_emenda_server("mod_emenda1")
+          pericia <- mod_pericia_server("mod_pericia1")
+          litisconsorcio <- mod_litisconsorcio_server("mod_litisconsorcio1")
+
+          tbl_processo <- dplyr::bind_cols(
+            emenda(), pericia(), litisconsorcio()
+          ) |>
+            dplyr::mutate(
+              id_processo = input$id_processo) |>
+            dplyr::relocate(id_processo) |>
+            dplyr::mutate(dplyr::across(
+              dplyr::starts_with("data"), lubridate::as_date
+            ))
+
+          output$teste <- shiny::renderDataTable(tbl_processo)
+
+
+        } else {
+
+          text <- ""
+          tbl_processo <- tibble::tibble()
+
+        }
+
+        # con <- bq_connect()
+        # bigrquery::dbWriteTable(
+        #   con, "processo",
+        #   processo,
+        #   append = TRUE
+        # )
+        # bigrquery::dbDisconnect(con)
 
         shinyWidgets::sendSweetAlert(
           title = "Upload feito", type = "success", text = text
         )
 
       })
-
-      teste <- mod_emenda_server("mod_emenda1")
-      output$emenda_output <- shiny::renderPrint(teste$emenda())
-
 
       id_processo <- shiny::reactive(input$id_processo)
       return(id_processo)

@@ -30,7 +30,10 @@ mod_pericia_ui <- function(id) {
 mod_pericia_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
+    shiny::reactive(tibble::tibble(
+      houve_pericia = input$pericia,
+      data_pericia = ifelse(input$pericia == "Não", NA, input$data_pericia)
+    ))
 
   })
 }
