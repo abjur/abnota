@@ -17,10 +17,12 @@ Imports:
     bit64,
     bslib (>= 0.4.2.9000),
     dplyr,
+    lubridate,
     purrr,
     rhandsontable,
     shiny,
     shinyWidgets,
+    stringr,
     tibble,
     tidyr
 URL: https://github.com/abjur/abjClassifica

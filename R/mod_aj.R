@@ -50,7 +50,9 @@ mod_aj_ui <- function(id) {
 mod_aj_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
+    shiny::reactive(tibble::tibble(
+      aj_pfpj = input$pfpj
+    ))
 
   })
 }

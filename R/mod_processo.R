@@ -44,15 +44,15 @@ mod_processo_ui <- function(id) {
           shiny::h4("Perícia"),
           mod_pericia_ui(ns("mod_pericia1")),
           mod_litisconsorcio_ui(ns("mod_litisconsorcio1"))
-        )
-        # bslib::accordion_panel(
-        #   "Deferimento",
-        #   mod_deferimento_ui("mod_deferimento1")
-        # ),
-        # bslib::accordion_panel(
-        #   "Administrador Judicial",
-        #   mod_aj_ui("mod_aj1")
-        # ),
+        ),
+        bslib::accordion_panel(
+          "Deferimento",
+          mod_deferimento_ui(ns("mod_deferimento1"))
+        ),
+        bslib::accordion_panel(
+          "Administrador Judicial",
+          mod_aj_ui(ns("mod_aj1"))
+        ),
         # bslib::accordion_panel(
         #   "Credores",
         #   mod_credores_ui("mod_credores1")
@@ -81,33 +81,39 @@ mod_processo_server <- function(id) {
           )
         }
 
-        if (input$processo_principal_rj == "Sim") {
+        if (check_id) {
+          if (input$processo_principal_rj == "Sim") {
 
-          text <- "Preencha os dados de partes"
+            text <- "Preencha os dados de partes"
 
-          emenda <- mod_emenda_server("mod_emenda1")
-          pericia <- mod_pericia_server("mod_pericia1")
-          litisconsorcio <- mod_litisconsorcio_server("mod_litisconsorcio1")
+            emenda <- mod_emenda_server("mod_emenda1")
+            pericia <- mod_pericia_server("mod_pericia1")
+            litisconsorcio <- mod_litisconsorcio_server("mod_litisconsorcio1")
+            deferimento <- mod_deferimento_server("mod_deferimento1")
+            aj <- mod_aj_server("mod_aj1")
 
-          tbl_processo <- dplyr::bind_cols(
-            emenda(), pericia(), litisconsorcio()
-          ) |>
-            dplyr::mutate(
-              id_processo = input$id_processo) |>
-            dplyr::relocate(id_processo) |>
-            dplyr::mutate(dplyr::across(
-              dplyr::starts_with("data"), lubridate::as_date
-            ))
+            tbl_processo <- dplyr::bind_cols(
+              emenda(), pericia(), litisconsorcio(), deferimento(), aj()
+            ) |>
+              dplyr::mutate(
+                id_processo = input$id_processo) |>
+              dplyr::relocate(id_processo) |>
+              dplyr::mutate(dplyr::across(
+                dplyr::starts_with("data"), lubridate::as_date
+              ))
 
-          output$teste <- shiny::renderDataTable(tbl_processo)
+            output$teste <- shiny::renderDataTable(tbl_processo)
 
 
-        } else {
+          } else {
 
-          text <- ""
-          tbl_processo <- tibble::tibble()
+            text <- ""
+            tbl_processo <- tibble::tibble()
 
+          }
         }
+
+
 
         # con <- bq_connect()
         # bigrquery::dbWriteTable(

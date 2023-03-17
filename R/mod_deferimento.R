@@ -18,7 +18,7 @@ mod_deferimento_ui <- function(id) {
     ),
     shiny::conditionalPanel(
       "input.deferimento == 'Sim'",
-      shiny::dateInput("data_deferimento", "Data do deferimento"),
+      shiny::dateInput(ns("data_deferimento"), "Data do deferimento"),
       shiny::selectInput(
         ns("visto_mp"),
         "Foi aberto visto ao Ministério Público antes do deferimento?",
@@ -57,7 +57,21 @@ mod_deferimento_ui <- function(id) {
 mod_deferimento_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
+    shiny::reactive(tibble::tibble(
+      deferimento = input$deferimento,
+      data_deferimento = ifelse(
+        input$deferimento == "Sim", input$data_deferimento, NA
+      ),
+      data_indeferimento = ifelse(
+        input$deferimento == "Não", input$data_indeferimento, NA
+      ),
+      data_extincao = ifelse(
+        input$deferimento == "Houve desistência do pedido de recuperação judicial",
+        input$data_extincao, NA
+      ),
+      visto_mp = ifelse(input$deferimento == "Sim", input$visto_mp, NA),
+      certidao = ifelse(input$deferimento == "Sim", input$certidao, NA)
+    ))
 
   })
 }
