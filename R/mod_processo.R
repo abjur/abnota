@@ -53,10 +53,10 @@ mod_processo_ui <- function(id) {
           "Administrador Judicial",
           mod_aj_ui(ns("mod_aj1"))
         ),
-        # bslib::accordion_panel(
-        #   "Credores",
-        #   mod_credores_ui("mod_credores1")
-        # )
+        bslib::accordion_panel(
+          "Credores",
+          mod_credores_ui(ns("mod_credores1"))
+        )
       )
     ),
     shiny::hr(),
@@ -91,9 +91,11 @@ mod_processo_server <- function(id) {
             litisconsorcio <- mod_litisconsorcio_server("mod_litisconsorcio1")
             deferimento <- mod_deferimento_server("mod_deferimento1")
             aj <- mod_aj_server("mod_aj1")
+            credores <- mod_credores_server("mod_credores1")
 
             tbl_processo <- dplyr::bind_cols(
-              emenda(), pericia(), litisconsorcio(), deferimento(), aj()
+              emenda(), pericia(), litisconsorcio(), deferimento(), aj(),
+              credores()$credores
             ) |>
               dplyr::mutate(
                 id_processo = input$id_processo) |>

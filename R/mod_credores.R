@@ -64,7 +64,26 @@ mod_credores_ui <- function(id) {
 mod_credores_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
-    ns <- session$ns
+    tbl_credores <- shiny::reactive(tibble::tibble(
+      credores_requerente = input$credores_requerente,
+      data_listacred_requerente = ifelse(
+        input$credores_requerente == "Sim", input$data_listacred_requerente, NA
+      ),
+      valor_requerente = ifelse(
+        input$credores_requerente == "Sim", input$valor_requerente, NA,
+      ),
+      credores_aj = input$credores_aj,
+      data_listacred_aj = ifelse(
+        input$credores_aj == "Sim", input$data_listacred_aj, NA
+      ),
+      valor_aj = ifelse(input$credores_aj == "Sim", input$valor_aj, NA)
+    ))
+
+    list(
+      credores = tbl_credores,
+      pdf_credores_requerente = input$lista_credores_requerente,
+      pdf_credores_aj = input$lista_credores_aj
+    )
 
   })
 }
