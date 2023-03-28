@@ -51,7 +51,14 @@ mod_aj_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
     shiny::reactive(tibble::tibble(
-      aj_pfpj = input$pfpj
+      aj_pfpj = input$pfpj,
+      aj_nome = input$nome_aj,
+      aj_cpf_cnpj = input$cpf_cnpj,
+      data_tc = input$data_tc,
+      aj_tipo_remuneracao = input$tipo_remuneracao,
+      aj_periodicidade_remuneracao = input$periodicidade_remuneracao,
+      aj_valor_remuneracao = input$valor_remuneracao,
+      aj_provisoria_remuneracao = input$provisoria_remuneracao
     ))
 
   })

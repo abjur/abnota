@@ -6,7 +6,7 @@ bq_connect <- function() {
   con <- bigrquery::dbConnect(
     bigrquery::bigquery(),
     project = "abj-dev",
-    dataset = "teste",
+    dataset = "abjclassifica_rj",
     billing = "abj-dev"
   )
 

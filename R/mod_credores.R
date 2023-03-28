@@ -70,7 +70,7 @@ mod_credores_server <- function(id) {
         input$credores_requerente == "Sim", input$data_listacred_requerente, NA
       ),
       valor_requerente = ifelse(
-        input$credores_requerente == "Sim", input$valor_requerente, NA,
+        input$credores_requerente == "Sim", input$valor_requerente, NA
       ),
       credores_aj = input$credores_aj,
       data_listacred_aj = ifelse(
@@ -81,8 +81,8 @@ mod_credores_server <- function(id) {
 
     list(
       credores = tbl_credores,
-      pdf_credores_requerente = input$lista_credores_requerente,
-      pdf_credores_aj = input$lista_credores_aj
+      pdf_credores_requerente = shiny::reactive(input$lista_credores_requerente),
+      pdf_credores_aj = shiny::reactive(input$lista_credores_aj)
     )
 
   })
