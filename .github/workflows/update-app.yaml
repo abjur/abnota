@@ -1,0 +1,33 @@
+on:
+  workflow_dispatch:
+
+name: app
+jobs:
+  render:
+    name: update-shinyapp
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::devtools
+            any::rsconnect
+      - name: Install package to deploy app
+        env:
+          GITHUB_PAT: ${{ secrets.PAT }}
+        run: |
+          devtools::install_github("abjur/abjClassifica", force = TRUE)
+        shell: Rscript {0}
+      - name: Execute Script
+        env:
+          SHINYAPPS_TOKEN: ${{ secrets.SAT }}
+          SHINYAPPS_SECRET: ${{ secrets.SAS }}
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript "inst/update-app.R"

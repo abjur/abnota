@@ -1,0 +1,1 @@
+shiny::shinyApp(abjClassifica:::app_ui(), abjClassifica:::app_server)
