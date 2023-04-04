@@ -24,7 +24,7 @@ mod_stay_ui <- function(id) {
 #' @param id id
 #'
 #' @export
-mod_emenda_server <- function(id) {
+mod_stay_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
 
     shiny::reactive(tibble::tibble(

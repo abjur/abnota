@@ -17,15 +17,18 @@ Imports:
     bit64,
     bslib (>= 0.4.2.9000),
     dplyr,
-    lubridate,
+    googledrive,
+    obsutils (>= 0.0.0.9000),
     purrr,
     rhandsontable,
     shiny,
+    shinydashboard,
     shinyWidgets,
     stringr,
     tibble,
     tidyr
 URL: https://github.com/abjur/abjClassifica
 BugReports: https://github.com/abjur/abjClassifica/issues
-Remotes: 
-    rstudio/bslib
+Remotes:
+    rstudio/bslib,
+    abjur/obsutils
