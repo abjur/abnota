@@ -10,14 +10,31 @@ mod_pericia_ui <- function(id) {
   shiny::tagList(
     shiny::selectInput(
       ns("pericia"), "Houve pedido de perícia prévia?",
-      choices = c("Sim", "Não")
+      choices = c("Sim", "Não"), selected = "Não"
     ),
     shiny::conditionalPanel(
       "input.pericia == 'Sim'",
       shiny::dateInput(
-        ns("data_pericia"), "Data do pedido de perícia prévia",
+        ns("data_pericia_pedido"), "Data do pedido de perícia prévia",
         format = "dd/mm/yyyy"
-      ), ns = ns
+      ),
+      shiny::dateInput(
+        ns("data_pericia"), "Data da perícia prévia",
+        format = "dd/mm/yyyy"
+      ),
+      shiny::textInput(ns("nome_perito"), "Nome do perito"),
+      shiny::textInput(ns("doc_perito"), "CNPJ/CPF/OAB do perito"),
+      shiny::selectInput(
+        ns("tipo_doc_perito"), "Tipo de documento do perito",
+        choices = c("CNPJ", "CPF", "OAB")
+      ),
+      shiny::selectInput(
+        ns("parecer_perito"), "Parecer do perito",
+        choices = c(
+          "Deferimento da RJ", "Indeferimento da RJ", "Emenda inicial do pedido"
+        )
+      ),
+      ns = ns
     )
   )
 }

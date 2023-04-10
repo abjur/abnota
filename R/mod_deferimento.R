@@ -29,7 +29,8 @@ mod_deferimento_ui <- function(id) {
       shiny::selectInput(
         ns("certidao"),
         "Houve apresentação de certidão negativa de débitos?",
-        choices = c("Sim", "Não", "O juiz dispensou a apresentação")
+        choices = c("Sim", "Não", "O juiz dispensou a apresentação"),
+        selected = "O juiz dispensou a apresentação"
       ),
       ns = ns
     ),
