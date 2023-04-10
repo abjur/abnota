@@ -16,7 +16,8 @@ mod_credores_ui <- function(id) {
       "input.credores_requerente == 'Sim'",
       shiny::dateInput(
         ns("data_listacred_requerente"),
-        "Data de apresentação da lista de credores do requerente"
+        "Data de apresentação da lista de credores do requerente",
+        format = "dd/mm/yyyy"
       ),
       shiny::numericInput(
         ns("valor_requerente"),
@@ -38,7 +39,7 @@ mod_credores_ui <- function(id) {
       "input.credores_aj == 'Sim'",
       shiny::dateInput(
         ns("data_listacred_aj"),
-        "Data de apresentação da lista de credores do AJ"
+        "Data de apresentação da lista de credores do AJ", format = "dd/mm/yyyy"
       ),
       shiny::numericInput(
         ns("valor_aj"),

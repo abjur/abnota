@@ -38,7 +38,10 @@ mod_processo_ui <- function(id) {
           "Informações gerais",
           shiny::textInput(ns("classe"), "Classe"),
           shiny::textInput(ns("assunto"), "Assunto"),
-          shiny::dateInput(ns("data_distribuicao"), "Data de distribuição"),
+          shiny::dateInput(
+            ns("data_distribuicao"), "Data de distribuição",
+            format = "dd/mm/yyyy"
+          ),
           shiny::h4("Emenda"),
           mod_emenda_ui(ns("mod_emenda1")),
           shiny::h4("Perícia"),

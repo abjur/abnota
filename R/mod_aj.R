@@ -15,7 +15,8 @@ mod_aj_ui <- function(id) {
     shiny::textInput(ns("nome_aj"), "Nome do AJ"),
     shiny::textInput(ns("cpf_cnpj"), "CPF ou CNPJ"),
     shiny::dateInput(
-      ns("data_tc"), "Data de assinatura do termo de compromisso"
+      ns("data_tc"), "Data de assinatura do termo de compromisso",
+      format = "dd/mm/yyyy"
     ),
     shiny::selectInput(
       ns("tipo_remuneracao"),

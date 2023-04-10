@@ -13,7 +13,7 @@ mod_stay_ui <- function(id) {
       choices = c("Sim", "Não")
     ),
     shiny::dateInput(
-      ns("stay_data_fim"), "Data do fim do stay period"
+      ns("stay_data_fim"), "Data do fim do stay period", format = "dd/mm/yyyy"
     )
   )
 }

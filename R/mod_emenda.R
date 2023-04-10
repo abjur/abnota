@@ -15,7 +15,8 @@ mod_emenda_ui <- function(id) {
     shiny::conditionalPanel(
       "input.emenda == 'Sim'",
       shiny::dateInput(
-        ns("data_emenda"), "Data da emenda da petição inicial"
+        ns("data_emenda"), "Data da emenda da petição inicial",
+        format = "dd/mm/yyyy"
       ), ns = ns
     )
   )

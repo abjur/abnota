@@ -15,7 +15,8 @@ mod_pericia_ui <- function(id) {
     shiny::conditionalPanel(
       "input.pericia == 'Sim'",
       shiny::dateInput(
-        ns("data_pericia"), "Data do pedido de perícia prévia"
+        ns("data_pericia"), "Data do pedido de perícia prévia",
+        format = "dd/mm/yyyy"
       ), ns = ns
     )
   )

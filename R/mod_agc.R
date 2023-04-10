@@ -52,13 +52,16 @@ mod_agc_ui <- function(id) {
         "input.plano_uno == 'Houve plano único, mas grupo faliu antes da ",
         "primeira AGC'"
       ),
-      shiny::dateInput(ns("data_falencia"), "Data da falência"),
+      shiny::dateInput(
+        ns("data_falencia"), "Data da falência", format = "dd/mm/yyyy"
+      ),
       ns = ns
     ),
     shiny::conditionalPanel(
       "input.desfecho_plano == 'O plano foi aprovado'",
       shiny::dateInput(
-        ns("data_aprovacao_plano"), "Data da aprovação do plano"
+        ns("data_aprovacao_plano"), "Data da aprovação do plano",
+        format = "dd/mm/yyyy"
       ),
       shiny::dateInput(
         ns("data_homologacao_plano"), "Data da homologação do plano"

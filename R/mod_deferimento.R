@@ -18,7 +18,9 @@ mod_deferimento_ui <- function(id) {
     ),
     shiny::conditionalPanel(
       "input.deferimento == 'Sim'",
-      shiny::dateInput(ns("data_deferimento"), "Data do deferimento"),
+      shiny::dateInput(
+        ns("data_deferimento"), "Data do deferimento", format = "dd/mm/yyyy"
+      ),
       shiny::selectInput(
         ns("visto_mp"),
         "Foi aberto visto ao Ministério Público antes do deferimento?",
@@ -33,7 +35,9 @@ mod_deferimento_ui <- function(id) {
     ),
     shiny::conditionalPanel(
       "input.deferimento == 'Não'",
-      shiny::dateInput(ns("data_indeferimento"), "Data do indeferimento"),
+      shiny::dateInput(
+        ns("data_indeferimento"), "Data do indeferimento", format = "dd/mm/yyyy"
+      ),
       ns = ns
     ),
     shiny::conditionalPanel(
@@ -41,7 +45,10 @@ mod_deferimento_ui <- function(id) {
         "input.deferimento ==",
         "'Houve desistência do pedido de recuperação judicial'"
       ),
-      shiny::dateInput(ns("data_extincao"), "Data de extinção do processo"),
+      shiny::dateInput(
+        ns("data_extincao"), "Data de extinção do processo",
+        format = "dd/mm/yyyy"
+      ),
       ns = ns
     )
 
