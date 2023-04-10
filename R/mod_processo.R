@@ -53,14 +53,6 @@ mod_processo_ui <- function(id) {
           mod_deferimento_ui(ns("mod_deferimento1"))
         ),
         bslib::accordion_panel(
-          "Administrador Judicial",
-          mod_aj_ui(ns("mod_aj1"))
-        ),
-        bslib::accordion_panel(
-          "Credores",
-          mod_credores_ui(ns("mod_credores1"))
-        ),
-        bslib::accordion_panel(
           "Stay period",
           mod_stay_ui(ns("mod_stay1"))
         )

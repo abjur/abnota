@@ -27,7 +27,8 @@ mod_partes_server <- function(id, input_mod_processo) {
         id_processo = character(),
         id_parte = bit64::integer64(),
         nome_parte = character(),
-        cpf_cnpj = character()
+        cpf_cnpj = character(),
+        deferiu = character()
       )
 
 

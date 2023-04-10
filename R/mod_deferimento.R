@@ -9,7 +9,7 @@ mod_deferimento_ui <- function(id) {
 
   shiny::tagList(
     shiny::selectInput(
-      ns("deferimento"), "O processo foi deferido para todas as empresas?",
+      ns("deferimento"), "Houve deferimento para pelo menos uma empresa?",
       choices = c(
         "Sim", "Não",
         "Ainda não houve decisão de deferimento/indeferimento",

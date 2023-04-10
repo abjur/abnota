@@ -13,9 +13,17 @@ mod_aj_ui <- function(id) {
       choices = c("Física", "Jurídica")
     ),
     shiny::textInput(ns("nome_aj"), "Nome do AJ"),
-    shiny::textInput(ns("cpf_cnpj"), "CPF ou CNPJ"),
+    shiny::textInput(ns("doc_aj"), "CPF/CNPJ/OAB"),
+    shiny::selectInput(ns("tipo_documento"), "Tipo de documento", choices = c(
+      "CPF", "CNPJ", "OAB"
+    )),
     shiny::dateInput(
-      ns("data_tc"), "Data de assinatura do termo de compromisso",
+      ns("data_tc_1"), "Data da primeira assinatura do termo de compromisso",
+      format = "dd/mm/yyyy"
+    ),
+    shiny::dateInput(
+      ns("data_tc_n"),
+      "Data da última assinatura do termo de compromisso (se houver)",
       format = "dd/mm/yyyy"
     ),
     shiny::selectInput(
@@ -54,8 +62,10 @@ mod_aj_server <- function(id) {
     shiny::reactive(tibble::tibble(
       aj_pfpj = input$pfpj,
       aj_nome = input$nome_aj,
-      aj_cpf_cnpj = input$cpf_cnpj,
-      data_tc = input$data_tc,
+      aj_doc = input$doc_aj,
+      aj_tipo_doc = input$tipo_documento,
+      data_tc_1 = input$data_tc_1,
+      data_tc_n = input$data_tc_n,
       aj_tipo_remuneracao = input$tipo_remuneracao,
       aj_periodicidade_remuneracao = input$periodicidade_remuneracao,
       aj_valor_remuneracao = input$valor_remuneracao,
