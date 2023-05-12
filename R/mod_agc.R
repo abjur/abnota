@@ -179,7 +179,9 @@ mod_agc_server <- function(id, input_mod_processo) {
       )
       output$tbl_agc <- rhandsontable::renderRHandsontable(
         rhandsontable::rhandsontable(tbl_agc) |>
-        rhandsontable::hot_col(col = "id_processo", default = id_processo()) |>
+        rhandsontable::hot_col(
+          col = "id_processo", default = id_processo(), readOnly = TRUE
+        ) |>
         rhandsontable::hot_col(col = "data_agc", dateFormat = "DD/MM/YYYY")
       )
       tbl_credores <- tibble::tibble(

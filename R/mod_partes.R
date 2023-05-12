@@ -41,7 +41,9 @@ mod_partes_server <- function(id, input_mod_processo) {
         output$tbl_partes <- rhandsontable::renderRHandsontable(
           partes |>
             rhandsontable::rhandsontable() |>
-            rhandsontable::hot_col(col = "id_processo", default = id_processo())
+            rhandsontable::hot_col(
+              col = "id_processo", default = id_processo(), readOnly = TRUE
+            )
         )
       })
 
