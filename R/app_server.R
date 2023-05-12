@@ -5,7 +5,7 @@
 #' @noRd
 app_server <- function(input, output, session) {
   id_processo <- mod_processo_server("mod_processo1")
-  mod_agc_server("mod_agc1")
+  mod_agc_server("mod_agc1", id_processo)
   mod_partes_server("mod_partes1", id_processo)
 
 }

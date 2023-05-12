@@ -23,10 +23,13 @@ mod_pericia_ui <- function(id) {
         format = "dd/mm/yyyy"
       ),
       shiny::textInput(ns("nome_perito"), "Nome do perito"),
-      shiny::textInput(ns("doc_perito"), "CNPJ/CPF/OAB do perito"),
       shiny::selectInput(
         ns("tipo_doc_perito"), "Tipo de documento do perito",
         choices = c("CNPJ", "CPF", "OAB")
+      ),
+      shiny::textInput(
+        ns("doc_perito"),
+        "CNPJ/CPF/OAB do perito (somente números; no caso de OAB 0000000UF)"
       ),
       shiny::selectInput(
         ns("parecer_perito"), "Parecer do perito",
