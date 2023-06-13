@@ -7,7 +7,10 @@ mod_processo_ui <- function(id) {
       id = "processo",
       bslib::accordion_panel(
         "Questões preliminares",
-        shiny::textInput(ns("id_processo"), "Número do processo"),
+        shinycssloaders::withSpinner(
+          shiny::uiOutput(ns("id_processo_ui")),
+          caption = "Pegando processo de lista"
+        ),
         shiny::selectInput(
           ns("processo_principal_rj"),
           "É o processo principal de uma recuperação judicial?",
@@ -69,6 +72,23 @@ mod_processo_server <- function(id) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
+
+      ns <- session$ns
+
+      output$id_processo_ui <- shiny::renderUI({
+        con <- bq_connect()
+        id_anotar <- con |>
+          dplyr::tbl("listagem_teste") |>
+          dplyr::filter(!classificado) |>
+          head(1) |>
+          dplyr::pull(id_processo)
+        bigrquery::dbDisconnect(con)
+        shiny::textInput(
+          ns("id_processo"), "Número do processo",
+          value = id_anotar
+        )
+      })
+
 
       shiny::observeEvent(input$upload_processo, {
 
