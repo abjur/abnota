@@ -1,4 +1,4 @@
-Package: abjClassifica
+Package: abnota
 Title: App para Classificacao de Processos
 Version: 0.0.0.9000
 Authors@R:
@@ -27,8 +27,8 @@ Imports:
     stringr,
     tibble,
     tidyr
-URL: https://github.com/abjur/abjClassifica
-BugReports: https://github.com/abjur/abjClassifica/issues
+URL: https://github.com/abjur/abnota
+BugReports: https://github.com/abjur/abnota/issues
 Remotes:
     rstudio/bslib,
     abjur/obsutils

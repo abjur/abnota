@@ -4,4 +4,4 @@ rsconnect::setAccountInfo(
   secret = Sys.getenv('SHINYAPPS_SECRET')
 )
 
-rsconnect::deployApp('inst/app', appName = "abjClassifica")
+rsconnect::deployApp('inst/app', appName = "abnota")

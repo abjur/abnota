@@ -49,7 +49,6 @@ mod_partes_server <- function(id, input_mod_processo) {
 
       shiny::observeEvent(input$upload_partes, {
 
-
         cols <- input$tbl_partes$params$colHeaders
         partes <- input$tbl_partes$data |>
           purrr::transpose() |>

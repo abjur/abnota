@@ -1,1 +1,1 @@
-shiny::shinyApp(abjClassifica:::app_ui(), abjClassifica:::app_server)
+shiny::shinyApp(abnota:::app_ui(), abnota:::app_server)

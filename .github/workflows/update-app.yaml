@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PAT }}
         run: |
-          devtools::install_github("abjur/abjClassifica", force = TRUE)
+          devtools::install_github("abjur/abnota", force = TRUE)
         shell: Rscript {0}
       - name: Execute Script
         env:
