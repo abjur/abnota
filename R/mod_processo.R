@@ -35,6 +35,7 @@ mod_processo_ui <- function(id) {
     ),
     shiny::conditionalPanel(
       paste0("input['", ns("processo_principal_rj"), "'] == 'Sim'"),
+      shiny::actionButton(ns("send_gpt"), "Calcular informações"),
       bslib::accordion(
         id = "sim_rj",
         bslib::accordion_panel(
@@ -89,6 +90,41 @@ mod_processo_server <- function(id) {
         )
       })
 
+
+      # Passa informações de movimentações para GPT
+
+      result_gpt <- shiny::eventReactive(input$send_gpt, {
+        # con <- bq_connect()
+        # movs <- con |>
+        #   dplyr::tbl("movs_teste") |>
+        #   dplyr::filter(id_processo == input$id_processo, tem_anexo) |>
+        #   head(28) |>
+        #   jsonlite::toJSON()
+        # result_deferimento <- openai::create_chat_completion(
+        #   "gpt-4",
+        #   messages = list(
+        #     list(
+        #       role = "system",
+        #       content = readr::read_file("data-raw/txt/prompt_deferimento.txt")
+        #     ),
+        #     list(
+        #       role = "user",
+        #       content = paste0(json_deferimento, "\n\nResposta:\n")
+        #     )
+        #   ),
+        #   temperature = 0
+        # )
+        # gpt_deferimento <- result_deferimento |>
+        #   purrr::pluck("choices", "message.content") |>
+        #   jsonlite::fromJSON() |>
+        #   tibble::as_tibble()
+
+        result <- readr::read_rds("data-raw/list_resultados.rds")
+        result
+      })
+
+
+      # Upload dos dados no BQ
 
       shiny::observeEvent(input$upload_processo, {
 
@@ -205,7 +241,11 @@ mod_processo_server <- function(id) {
       })
 
       id_processo <- shiny::reactive(input$id_processo)
-      return(id_processo)
+      result_gpt <- result_gpt()
+      return(list(
+        id_processo,
+        result_gpt
+      ))
     }
   )
 }

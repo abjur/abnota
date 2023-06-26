@@ -24,7 +24,7 @@ mod_partes_server <- function(id, input_mod_processo) {
 
       shiny::observe({
         id_processo <- function(x) {
-          input_mod_processo()
+          input_mod_processo()$id_processo
         }
         partes <- tibble::tibble(
           id_processo = id_processo(),
