@@ -5,10 +5,12 @@
 \title{Módulo de perguntas sobre AGC
 Informações sobre AGC}
 \usage{
-mod_agc_server(id)
+mod_agc_server(id, input_mod_processo)
 }
 \arguments{
 \item{id}{id}
+
+\item{input_mod_processo}{input_mod_processo}
 }
 \description{
 Módulo de perguntas sobre AGC

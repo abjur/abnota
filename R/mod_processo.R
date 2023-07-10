@@ -81,7 +81,7 @@ mod_processo_server <- function(id) {
         id_anotar <- con |>
           dplyr::tbl("listagem_teste") |>
           dplyr::filter(!classificado) |>
-          head(1) |>
+          utils::head(1) |>
           dplyr::pull(id_processo)
         bigrquery::dbDisconnect(con)
         shiny::textInput(

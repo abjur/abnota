@@ -156,6 +156,7 @@ mod_agc_ui <- function(id) {
 #' Informações sobre AGC
 #'
 #' @param id id
+#' @param input_mod_processo input_mod_processo
 #'
 #' @export
 mod_agc_server <- function(id, input_mod_processo) {

@@ -14,19 +14,25 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
     bigrquery,
-    bit64,
     bslib (>= 0.4.2.9000),
     dplyr,
     googledrive,
+    jsonlite,
     obsutils (>= 0.0.0.9000),
+    openai,
     purrr,
+    R6,
+    readr,
     rhandsontable,
+    rlang,
     shiny,
+    shinycssloaders,
     shinydashboard,
     shinyWidgets,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    utils
 URL: https://github.com/abjur/abnota
 BugReports: https://github.com/abjur/abnota/issues
 Remotes:
