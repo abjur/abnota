@@ -1,3 +1,9 @@
+#' new_proc
+#'
+#' @param ... params for R6 object
+#'
+#' @export
+#'
 new_proc <- function(...) {
   processo <- R6::R6Class(
     "processo",

@@ -1,3 +1,9 @@
+#' upload_processo
+#'
+#' @param processo processo
+#'
+#' @export
+#'
 upload_processo <- function(processo) {
   tbl <- tibble::as_tibble(processo$gpt)
   con <- bq_connect()
