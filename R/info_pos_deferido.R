@@ -22,7 +22,7 @@ info_pos_deferido <- function(proc) {
     utils::tail(30)
   proc$set_conditions(paste0("id_mov >= '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
-    dplyr::coalesce(movs_aprovacao, proc$movs),
+    dplyr::bind_rows(movs_aprovacao, proc$movs),
     "data-raw/txt/prompt_aprovacao.txt",
     proc$conditions,
     n_movs = 15
