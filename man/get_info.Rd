@@ -8,8 +8,8 @@ get_info(
   df,
   prompt,
   conditions = NA,
-  n_movs = 10,
-  token = Sys.getenv("OPENAI_API_TOKEN")
+  n_movs = 20,
+  token = Sys.getenv("OPENAI_API_KEY")
 )
 }
 \arguments{

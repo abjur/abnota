@@ -7,7 +7,7 @@
 info_pos_deferido <- function(proc) {
 
   ## AJ e TC
-  proc$set_conditions(paste0("id_mov >= '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data >= '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
     proc$movs, "data-raw/txt/prompt_aj.txt",
     proc$conditions
@@ -20,17 +20,16 @@ info_pos_deferido <- function(proc) {
       stringr::regex("aprov|homolog|conce", TRUE)
     )) |>
     utils::tail(30)
-  proc$set_conditions(paste0("id_mov >= '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data >= '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
     dplyr::bind_rows(movs_aprovacao, proc$movs),
     "data-raw/txt/prompt_aprovacao.txt",
-    proc$conditions,
-    n_movs = 15
+    proc$conditions
   ) |>
     dplyr::bind_cols(info)
 
   ## AJ listcred --
-  proc$set_conditions(paste0("id_mov > '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data > '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
         dplyr::filter(proc$movs, stringr::str_detect(movimento, stringr::regex("edital", TRUE))),
     "data-raw/txt/prompt_aj_listcred.txt",
@@ -39,9 +38,9 @@ info_pos_deferido <- function(proc) {
     dplyr::bind_cols(info)
 
   ## Req listcred
-  proc$set_conditions(paste0("id_mov > '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data > '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
-        dplyr::filter(proc$movs, stringr::str_detect(movimento, stringr::regex("edital", TRUE))),
+    dplyr::filter(proc$movs, stringr::str_detect(movimento, stringr::regex("edital", TRUE))),
     "data-raw/txt/prompt_req_listcred.txt",
     proc$conditions
   ) |>
@@ -51,13 +50,12 @@ info_pos_deferido <- function(proc) {
   proc$set_conditions(NA)
   info <- get_info(
     proc$movs, "data-raw/txt/prompt_stay_period.txt",
-    proc$conditions,
-    n_movs = 20
+    proc$conditions
   ) |>
     dplyr::bind_cols(info)
 
   ## Falência
-  proc$set_conditions(paste0("id_mov > '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data > '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
     proc$movs, "data-raw/txt/prompt_falencia.txt",
     proc$conditions
@@ -65,7 +63,7 @@ info_pos_deferido <- function(proc) {
     dplyr::bind_cols(info)
 
   ## AGCs
-  proc$set_conditions(paste0("id_mov > '", proc$gpt$dt_def_indef, "'"))
+  proc$set_conditions(paste0("data > '", proc$gpt$dt_def_indef, "'"))
   info <- get_info(
     proc$movs, "data-raw/txt/prompt_agcs.txt",
     proc$conditions

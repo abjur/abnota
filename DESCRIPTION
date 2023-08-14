@@ -30,6 +30,7 @@ Imports:
     shinycssloaders,
     shinydashboard,
     shinyWidgets,
+    stringi,
     stringr,
     tibble,
     tidyr,
